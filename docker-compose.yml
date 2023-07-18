@@ -50,6 +50,16 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongodb
     networks:
       - network
+  redis:
+    image: redis
+    container_name: local-redis
+    restart: always
+    ports: [6379:6379]
+    command: redis-server --save 60 1 --loglevel warning
+    volumes:
+      - redis-data:/data
+    networks:
+      - network
   
 networks:
   network:
@@ -60,3 +70,4 @@ volumes:
   postgres-data:
   mysql-data:
   mongo-data:
+  redis-data:
